@@ -34,7 +34,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   return (
     // Menghapus Navbar di sini agar tampilan lebih bersih (High-End feel)
-    <main className="bg-[#050505] min-h-screen">
+    <main className="bg-transparent min-h-screen">
       <ProjectDetailClient data={projectData} />
       <Footer />
     </main>

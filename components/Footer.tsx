@@ -170,7 +170,7 @@ function AnimatePresenceInline({
 export default function Footer() {
   return (
     <footer
-      className="relative bg-[#050505] overflow-hidden pt-8 pb-16 px-6"
+      className="relative bg-transparent overflow-hidden pt-8 pb-16 px-6"
       style={{ borderTop: "1px solid rgba(255,255,255,0.03)" }}
     >
       {/* Noise grain */}

@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function SkillsPage() {
   return (
-    <main className="bg-[#050505] min-h-screen">
+    <main className="bg-transparent min-h-screen">
       <Navbar />
       <div className="pt-32 pb-24">
         <SkillsClient />

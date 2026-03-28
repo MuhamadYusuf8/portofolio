@@ -601,7 +601,7 @@ function TechSeparator() {
 
 export default function Page() {
   return (
-    <main className="relative min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+    <main className="relative min-h-screen bg-transparent text-white overflow-x-hidden">
       <style>{`
         html { scroll-behavior: smooth; }
         * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }

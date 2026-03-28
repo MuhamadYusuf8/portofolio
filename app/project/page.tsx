@@ -18,7 +18,7 @@ export default async function ProjectsPage() {
   });
 
   return (
-    <main className="bg-[#050505] min-h-screen pt-32">
+    <main className="bg-transparent min-h-screen pt-32">
       <Navbar />
       {/* Mengirim data ke komponen interaktif */}
       <ProjectsArchiveClient initialProjects={projects} />

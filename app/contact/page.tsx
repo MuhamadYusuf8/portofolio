@@ -11,7 +11,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     // Background hitam pekat untuk mempertahankan ilusi premium
-    <main className="bg-[#050505] min-h-screen">
+    <main className="bg-transparent min-h-screen">
       <Navbar />
       
       {/* Kita berikan sedikit padding top tambahan (pt-10) di sini 

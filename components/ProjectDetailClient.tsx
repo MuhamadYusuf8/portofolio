@@ -201,7 +201,7 @@ function HeroMonolith({ title, imageUrl, category }: {
         className="absolute inset-0 z-[1]"
         style={{
           opacity: overlayOpacity,
-          background: imageUrl
+          background: imageUrl 
             ? "linear-gradient(to top, #050505 0%, rgba(5,5,5,0.85) 40%, rgba(5,5,5,0.50) 70%, rgba(5,5,5,0.30) 100%)"
             : "linear-gradient(135deg, #050505 0%, #0d0d1a 100%)",
         }}

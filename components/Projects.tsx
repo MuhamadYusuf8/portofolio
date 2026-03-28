@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function Projects({ initialProjects }: { initialProjects: any[] }) {
   return (
-    <section id="projects" className="py-24 bg-[#050505] relative overflow-hidden">
+    <section id="projects" className="py-24 bg-transparent relative overflow-hidden">
       {/* Ambient Glow */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
 

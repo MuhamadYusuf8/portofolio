@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       {/* Hapus Navbar dan Footer dari sini, biarkan children saja */}
-      <body className={`${inter.className} bg-slate-950 text-white antialiased`}>
+      <body className={`${inter.className} bg-[#050505] text-white antialiased`}>
         {children}
       </body>
     </html>

@@ -16,7 +16,7 @@ export default async function Home() {
   });
 
   return (
-    <main className="bg-[#050505] min-h-screen">
+    <main className="bg-transparent min-h-screen">
       <Navbar />
       
       {/* 1. First Impression */}

@@ -310,7 +310,7 @@ function CategorySection({ cat }: { cat: (typeof CATEGORIES)[0] }) {
 
 function StickyIndex({ active }: { active: string }) {
   return (
-    <aside className="hidden lg:flex flex-col justify-center gap-3 fixed top-0 left-10 xl:left-16 h-screen w-36 shrink-0 pr-6 z-40">
+    <aside className="hidden lg:flex flex-col justify-center gap-3 sticky top-0 h-screen w-36 shrink-0 pr-6 z-40">
       {CATEGORIES.map((cat) => {
         const isActive = active === cat.id;
         return (
@@ -510,8 +510,7 @@ export default function SkillsClient() {
 
   return (
     <div
-      className="relative min-h-screen text-white antialiased overflow-x-hidden"
-      style={{ background: "#050505" }}
+      className="relative min-h-screen text-white antialiased overflow-clip"
     >
       {/* Layers */}
       <NoiseOverlay />
@@ -519,12 +518,12 @@ export default function SkillsClient() {
       <ScrollProgress />
 
       {/* Layout: sticky index (left) + scrolling content (right) */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 xl:px-16">
-        {/* Fixed sidebar */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 xl:px-16 flex gap-0 lg:gap-12 xl:gap-20">
+        {/* Sticky sidebar */}
         <StickyIndex active={active} />
 
-        {/* Main content column — left padding reserves space for fixed sidebar on lg+ */}
-        <main className="flex-1 min-w-0 lg:pl-44 xl:pl-52">
+        {/* Main content column */}
+        <main className="flex-1 min-w-0">
           {/* Hero */}
           <HeroHeadline />
 

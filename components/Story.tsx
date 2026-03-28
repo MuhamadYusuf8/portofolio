@@ -438,7 +438,7 @@ export default function Story() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#050505] overflow-hidden"
+      className="relative w-full bg-transparent overflow-hidden"
     >
       {/* ── Grain Texture Overlay ── */}
       <div

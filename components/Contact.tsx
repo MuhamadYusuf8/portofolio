@@ -90,7 +90,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen bg-[#050505] overflow-hidden flex items-center justify-center py-32 px-6"
+      className="relative min-h-screen bg-transparent overflow-hidden flex items-center justify-center py-32 px-6"
     >
       {/* Ambient background glows */}
       <div className="absolute inset-0 pointer-events-none">

@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="bg-[#050505] min-h-screen pt-20">
+    <main className="bg-transparent min-h-screen pt-20">
       <Navbar />
       
       {/* Komponen timeline SVG raksasa kita sekarang punya halamannya sendiri! */}
