@@ -1,0 +1,77 @@
+// File: prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Model untuk Admin (Akses Dashboard)
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Model untuk Proyek (E-Voting, Absensi QR, Web Coffee Shop, dll)
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  description String   @db.Text
+  content     String?  @db.Text // Untuk Case Study panjang (Markdown/HTML)
+  imageUrl    String?
+  techStack   String[] // Array, misal: ["Next.js", "Prisma", "Tailwind"]
+  category    Category @default(FEATURED)
+  githubUrl   String?
+  liveUrl     String?
+  isPublished Boolean  @default(false)
+  views       Int      @default(0) // Untuk view counter
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Enum untuk mengkategorikan proyek
+enum Category {
+  FEATURED     // Proyek utama berdampak besar
+  EXPLORATION  // Eksplorasi UI, mini games, dll
+  FREELANCE    // Proyek klien
+}
+
+// Model untuk Sertifikat Penghargaan / Kompetisi
+model Certificate {
+  id           String   @id @default(uuid())
+  title        String
+  issuer       String   // Misal: SMKN 1 Pariaman, Unand, dll
+  dateReceived DateTime
+  imageUrl     String
+  description  String?
+  createdAt    DateTime @default(now())
+}
+
+// Model untuk Pengalaman (Organisasi / Kepemimpinan / Event)
+model Experience {
+  id          String   @id @default(uuid())
+  title       String   // Misal: Project Manager Comstat
+  role        String
+  startDate   DateTime
+  endDate     DateTime? // Null jika masih berlangsung
+  description String   @db.Text
+  createdAt   DateTime @default(now())
+}
+
+// Model untuk Pesan dari Contact Form
+model Message {
+  id          String   @id @default(uuid())
+  senderName  String
+  senderEmail String
+  body        String
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
