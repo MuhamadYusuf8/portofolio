@@ -10,7 +10,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     const { 
       title, slug, description, content, 
       imageUrl, liveUrl, githubUrl,
-      techStack, category, isPublished 
+      techStack, category, isPublished, isFeatured 
     } = body;
 
     // Update data di database
@@ -26,7 +26,8 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         githubUrl,
         techStack,
         category,
-        isPublished
+        isPublished,
+        isFeatured
       },
     });
 

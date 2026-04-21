@@ -90,7 +90,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen bg-transparent overflow-hidden flex items-center justify-center py-32 px-6"
+      className="relative min-h-screen bg-transparent overflow-hidden flex items-center justify-center py-20 px-4 sm:px-6"
     >
       {/* Ambient background glows */}
       <div className="absolute inset-0 pointer-events-none">
@@ -156,7 +156,7 @@ export default function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-white/30 text-lg font-light tracking-wide mb-16 max-w-md"
+          className="text-white/30 text-base sm:text-lg font-light tracking-wide mb-10 sm:mb-16 max-w-md"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           Drop me a message. I respond to every serious inquiry within 24 hours.
@@ -171,7 +171,7 @@ export default function Contact() {
           ref={formRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setOrb((o) => ({ ...o, visible: false }))}
-          className="relative rounded-2xl p-10 md:p-14 overflow-hidden"
+          className="relative rounded-2xl p-6 sm:p-10 md:p-14 overflow-hidden"
           style={{
             background: "rgba(255,255,255,0.02)",
             border: "1px solid rgba(255,255,255,0.05)",

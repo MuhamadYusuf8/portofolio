@@ -170,7 +170,7 @@ function AnimatePresenceInline({
 export default function Footer() {
   return (
     <footer
-      className="relative bg-transparent overflow-hidden pt-8 pb-16 px-6"
+      className="relative bg-transparent overflow-hidden pt-8 pb-16 px-4 sm:px-6"
       style={{ borderTop: "1px solid rgba(255,255,255,0.03)" }}
     >
       {/* Noise grain */}
@@ -208,7 +208,7 @@ export default function Footer() {
 
           {/* Brand name with easter egg */}
           <div
-            className="text-[clamp(4rem,14vw,12rem)] font-black leading-none tracking-[-0.04em] text-white select-none"
+            className="text-[clamp(2.8rem,12vw,12rem)] font-black leading-none tracking-[-0.04em] text-white select-none"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             MY<SecretDot />dev
@@ -242,19 +242,19 @@ export default function Footer() {
 
           <div className="flex flex-wrap gap-3">
             <SocialLink
-              href="https://github.com"
+              href="https://github.com/MuhamadYusuf8"
               label="GitHub"
               Icon={Github}
               delay={0.1}
             />
             <SocialLink
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/muhamad-yusuf-b13626380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
               label="LinkedIn"
               Icon={Linkedin}
               delay={0.2}
             />
             <SocialLink
-              href="mailto:hello@my.dev"
+              href="myucupp9@gmail.com"
               label="Email"
               Icon={Mail}
               delay={0.3}

@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     const { 
       title, slug, description, content, 
       imageUrl, liveUrl, githubUrl, // Ini yang tadinya tertinggal
-      techStack, category, isPublished 
+      techStack, category, isPublished, isFeatured 
     } = body;
 
     // Simpan ke database Supabase
@@ -24,7 +24,8 @@ export async function POST(request: Request) {
         githubUrl,   // Simpan Github URL
         techStack,
         category,
-        isPublished
+        isPublished,
+        isFeatured
       },
     });
 

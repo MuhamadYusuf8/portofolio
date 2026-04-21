@@ -44,18 +44,18 @@ const TECH_STACK = [
 ];
 
 const STATS = [
-  { value: "3+", label: "Years\nCoding", icon: <Coffee className="w-4 h-4" /> },
-  { value: "12+", label: "Projects\nBuilt", icon: <Briefcase className="w-4 h-4" /> },
+  { value: "1", label: "Years\nCoding", icon: <Coffee className="w-4 h-4" /> },
+  { value: "17+", label: "Projects\nBuilt", icon: <Briefcase className="w-4 h-4" /> },
   { value: "500+", label: "Students\nServed", icon: <GraduationCap className="w-4 h-4" /> },
   { value: "99%", label: "Uptime\nRecord", icon: <Star className="w-4 h-4" /> },
 ];
 
 const FLOATING_BADGES = [
-  { label: "Next.js", color: "border-white/20 text-white/60", pos: "top-[6%]  right-[-4%]", delay: 0 },
-  { label: "Laravel", color: "border-red-500/30 text-red-400", pos: "top-[28%] left-[-8%]", delay: 0.3 },
-  { label: "Full-Stack", color: "border-cyan-500/30 text-cyan-400", pos: "bottom-[32%] right-[-6%]", delay: 0.6 },
-  { label: "TypeScript", color: "border-blue-500/30 text-blue-400", pos: "bottom-[12%] left-[-4%]", delay: 0.9 },
-  { label: "PostgreSQL", color: "border-sky-500/30 text-sky-400", pos: "top-[55%] left-[-10%]", delay: 1.1 },
+  { label: "Next.js", color: "border-white/20 text-white/60", pos: "top-[6%]  right-[2%]", delay: 0 },
+  { label: "Laravel", color: "border-red-500/30 text-red-400", pos: "top-[28%] left-[2%]", delay: 0.3 },
+  { label: "Full-Stack", color: "border-cyan-500/30 text-cyan-400", pos: "bottom-[32%] right-[2%]", delay: 0.6 },
+  { label: "TypeScript", color: "border-blue-500/30 text-blue-400", pos: "bottom-[12%] left-[2%]", delay: 0.9 },
+  { label: "PostgreSQL", color: "border-sky-500/30 text-sky-400", pos: "top-[55%] left-[2%]", delay: 1.1 },
 ];
 
 // ─── Magnetic hook ────────────────────────────────────────────────────────────
@@ -212,14 +212,14 @@ function PhotoCard() {
       transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       className="relative w-full max-w-[400px] mx-auto lg:mx-0 lg:ml-auto"
     >
-      {/* Floating badges */}
+      {/* Floating badges - hidden on small screens to prevent overflow */}
       {FLOATING_BADGES.map((badge, i) => (
         <motion.div
           key={i}
           initial={{ opacity: 0, scale: 0.7 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 0.7 + badge.delay, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className={`absolute ${badge.pos} z-20`}
+          className={`absolute ${badge.pos} z-20 hidden lg:block`}
         >
           <motion.div
             animate={{ y: [0, -7, 0] }}
@@ -367,7 +367,7 @@ function AboutHero() {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center px-6 pt-24 pb-20"
+      className="relative min-h-screen flex items-center px-4 sm:px-6 pt-24 pb-20 overflow-x-hidden"
     >
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_460px] gap-14 xl:gap-20 items-center">
@@ -516,7 +516,7 @@ function AboutHero() {
             >
               {[
                 { icon: <Github className="w-4 h-4" />, href: "https://github.com/MuhamadYusuf8", label: "GitHub" },
-                { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com", label: "LinkedIn" },
+                { icon: <Linkedin className="w-4 h-4" />, href: "https://www.linkedin.com/in/muhamad-yusuf-b13626380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", label: "LinkedIn" },
                 { icon: <Mail className="w-4 h-4" />, href: "myucupp9@gmail.com", label: "Email" },
               ].map(s => (
                 <a key={s.label} href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
@@ -535,7 +535,7 @@ function AboutHero() {
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.52 }}
-              className="grid grid-cols-4 gap-2.5"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-2.5"
             >
               {STATS.map((stat, i) => (
                 <motion.div

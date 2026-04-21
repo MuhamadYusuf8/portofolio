@@ -41,6 +41,7 @@ interface Project {
   category: Category;
   liveUrl?: string | null;
   isPublished: boolean;
+  isFeatured: boolean;
   views: number;
   createdAt: Date | string;
   updatedAt: Date | string;
@@ -328,9 +329,16 @@ function TableRow({
         <div className="flex items-center gap-3 min-w-0">
           <Thumbnail imageUrl={project.imageUrl} title={project.title} />
           <div className="min-w-0">
-            <p className="text-sm font-semibold text-white/75 group-hover:text-white/90 transition-colors truncate leading-snug max-w-[200px]">
-              {project.title}
-            </p>
+            <div className="flex items-center gap-1.5">
+              <p className="text-sm font-semibold text-white/75 group-hover:text-white/90 transition-colors truncate leading-snug max-w-[180px]">
+                {project.title}
+              </p>
+              {project.isFeatured && (
+                <span title="Karya Unggulan di Homepage" className="flex-shrink-0">
+                  <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                </span>
+              )}
+            </div>
             <p className="text-[11px] text-white/25 font-mono mt-0.5 truncate max-w-[200px]">
               /{project.slug}
             </p>

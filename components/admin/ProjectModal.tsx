@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Save, Loader2, Type, Link as LinkIcon, Image as ImageIcon, Code, FileText, ToggleLeft, ToggleRight } from "lucide-react";
+import { X, Save, Loader2, Type, Link as LinkIcon, Image as ImageIcon, Code, FileText, ToggleLeft, ToggleRight, Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 // Tipe data untuk form
@@ -23,12 +23,14 @@ const DEFAULT_FORM = {
   githubUrl: "",
   liveUrl: "",
   isPublished: false,
+  isFeatured: false,
 };
 
 export default function ProjectModal({ isOpen, onClose, editData }: ProjectModalProps) {
   const router = useRouter();
   const [formData, setFormData] = useState(DEFAULT_FORM);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [error, setError] = useState("");
 
   // Efek: Jika modal dibuka, isi form dengan editData (jika ada) atau kosongkan
@@ -47,6 +49,7 @@ export default function ProjectModal({ isOpen, onClose, editData }: ProjectModal
           githubUrl: editData.githubUrl || "",
           liveUrl: editData.liveUrl || "",
           isPublished: editData.isPublished !== undefined ? editData.isPublished : (editData.status === "published"),
+          isFeatured: editData.isFeatured || false,
         });
       } else {
         setFormData(DEFAULT_FORM);
@@ -65,6 +68,38 @@ export default function ProjectModal({ isOpen, onClose, editData }: ProjectModal
       setFormData((prev) => ({ ...prev, slug: generatedSlug }));
     }
   }, [formData.title, editData]);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploadingImage(true);
+    setError("");
+
+    try {
+      const formDataUpload = new FormData();
+      formDataUpload.append("file", file);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formDataUpload,
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Gagal mengunggah gambar");
+      }
+
+      const data = await res.json();
+      if (data.url) {
+        setFormData((prev) => ({ ...prev, imageUrl: data.url }));
+      }
+    } catch (err: any) {
+      setError(err.message || "Gagal mengunggah gambar");
+    } finally {
+      setIsUploadingImage(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -197,10 +232,29 @@ export default function ProjectModal({ isOpen, onClose, editData }: ProjectModal
                 {/* Gambar & Tautan */}
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">Image URL</label>
-                    <div className="relative">
-                      <ImageIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-                      <input type="text" value={formData.imageUrl} onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500/50 transition-all" placeholder="https://..." />
+                    <label className="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">Image Upload</label>
+                    <div className="flex gap-4 items-center">
+                      {formData.imageUrl && (
+                        <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-white/5 border border-white/10">
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                           <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                        </div>
+                      )}
+                      <div className="relative flex-1">
+                        <ImageIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          disabled={isUploadingImage}
+                          className="w-full bg-white/[0.03] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500/50 transition-all file:mr-4 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-cyan-500/20 file:text-cyan-400 hover:file:bg-cyan-500/30"
+                        />
+                        {isUploadingImage && (
+                          <div className="absolute right-3.5 top-1/2 -translate-y-1/2">
+                            <Loader2 className="w-4 h-4 animate-spin text-cyan-400" />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -216,14 +270,33 @@ export default function ProjectModal({ isOpen, onClose, editData }: ProjectModal
                 </div>
 
                 {/* Status Publish */}
-                <div className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/[0.02]">
-                  <div>
-                    <p className="text-sm font-semibold text-white">Publish Project</p>
-                    <p className="text-xs text-white/40">Tampilkan proyek ini di halaman utamamu.</p>
+                <div className="space-y-3">
+                  {/* Karya Unggulan Toggle */}
+                  <div className="flex items-center justify-between p-4 rounded-xl border border-amber-500/20 bg-amber-500/[0.03]">
+                    <div className="flex items-center gap-3">
+                      <div className="p-1.5 rounded-lg bg-amber-500/10">
+                        <Star className="w-4 h-4 text-amber-400" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-white">Karya Unggulan</p>
+                        <p className="text-xs text-white/40">Tampilkan di bagian <span className="text-amber-400">Karya Unggulan</span> di homepage.</p>
+                      </div>
+                    </div>
+                    <button type="button" onClick={() => setFormData({ ...formData, isFeatured: !formData.isFeatured })} className={`transition-colors ${formData.isFeatured ? "text-amber-400" : "text-white/30"}`}>
+                      {formData.isFeatured ? <ToggleRight className="w-8 h-8" /> : <ToggleLeft className="w-8 h-8" />}
+                    </button>
                   </div>
-                  <button type="button" onClick={() => setFormData({ ...formData, isPublished: !formData.isPublished })} className={`transition-colors ${formData.isPublished ? "text-emerald-400" : "text-white/30"}`}>
-                    {formData.isPublished ? <ToggleRight className="w-8 h-8" /> : <ToggleLeft className="w-8 h-8" />}
-                  </button>
+
+                  {/* Publish Toggle */}
+                  <div className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/[0.02]">
+                    <div>
+                      <p className="text-sm font-semibold text-white">Publish Project</p>
+                      <p className="text-xs text-white/40">Tampilkan proyek ini di halaman proyek.</p>
+                    </div>
+                    <button type="button" onClick={() => setFormData({ ...formData, isPublished: !formData.isPublished })} className={`transition-colors ${formData.isPublished ? "text-emerald-400" : "text-white/30"}`}>
+                      {formData.isPublished ? <ToggleRight className="w-8 h-8" /> : <ToggleLeft className="w-8 h-8" />}
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>

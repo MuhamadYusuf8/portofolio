@@ -8,11 +8,11 @@ import Footer from "@/components/Footer";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  // Hanya ambil 4 proyek terbaru yang dipublish untuk "teaser"
+  // Hanya ambil proyek yang ditandai "Karya Unggulan" oleh admin
   const featuredProjects = await prisma.project.findMany({
-    where: { isPublished: true },
+    where: { isFeatured: true, isPublished: true },
     orderBy: { createdAt: "desc" },
-    take: 4, // <-- Ini kunci perampingannya!
+    take: 4,
   });
 
   return (

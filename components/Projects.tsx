@@ -7,11 +7,11 @@ import Image from "next/image";
 
 export default function Projects({ initialProjects }: { initialProjects: any[] }) {
   return (
-    <section id="projects" className="py-24 bg-transparent relative overflow-hidden">
+    <section id="projects" className="py-16 sm:py-24 bg-transparent relative overflow-hidden">
       {/* Ambient Glow */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10 max-w-[1200px]">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-[1200px]">
         {/* Header & View All Button */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-xl">
